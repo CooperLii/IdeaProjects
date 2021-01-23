@@ -1,0 +1,219 @@
+/**
+ * This program takes two java files and figure's out how close of a match they are.
+ * Then it goes though a string array of files and find any files
+ * that are identical to each other with a threshold of 55.0
+ *
+ * Data Structures
+ *
+ * @author Jose Martinez
+ * @version May 5 2019
+ */
+
+import java.io.File;
+import java.io.RandomAccessFile;
+
+
+public class PlagiarismChecker {
+
+    /**
+     * Main Method
+     * @param args
+     */
+    public static void main(String[] args) {
+        //creat a plagiarism object
+        PlagiarismChecker checker = new PlagiarismChecker();
+
+        /*
+        file one and file two are created from a string file name
+         */
+        String file1 = checker.readFile("Player1.java");
+        String file2 = checker.readFile("Player2.java");
+
+        // a double that comes from plagiarismScore method taking two files
+        double answer = checker.plagiarismScore(file1, file2);
+
+        /*
+        print header
+        format of the first two files with answer
+         */
+        System.out.println("Plagiarism Checker Sample Output");
+        System.out.println("File1         "+
+                "File2          "+ "Score       ");
+        System.out.print("Player1.java  " + "Player2.java   ");
+        System.out.printf("%3.2f  %n%n", answer);
+
+        //String array of text file names
+        String[] files = {"1.txt","2.txt","3.txt","4.txt","5.txt","6.txt","7.txt",
+                "8.txt","9.txt","10.txt","11.txt","12.txt","13.txt","14.txt","15.txt","16.txt",
+                "17.txt","18.txt","19.txt","20.txt","21.txt","22.txt","23.txt","24.txt","25.txt",
+                "26.txt","27.txt","28.txt","29.txt"};
+        // Call plagiarismChecker Method
+        checker.plagiarismChecker(files, 0);
+
+    }
+
+
+    /**
+     * Read in a file building it into one long string *
+     *
+     * @param fileName the name of the file
+     * @return the contents of a file as a string
+     */
+    private String readFile(String fileName) {
+        String contents = "";
+        try {
+            RandomAccessFile fin = new RandomAccessFile(new File(fileName), "r");
+            int b = fin.read();
+            while (b != -1) {
+                contents = contents + (char) b;
+                b = fin.read();
+            }
+        } catch (Exception e) {
+            System.err.println("Trouble reading from: " + fileName);
+        }
+        return contents;
+    }
+
+    /**
+     * lcsLength Method
+     * finds commend characters in two input files
+     *
+     * @param prog1 takes first file name
+     * @param prog2 takes the second file name
+     * @return an integer
+     */
+    private int lcsLength(String prog1, String prog2) {
+        /*
+        class variables
+        first file length
+        second file length
+        two dimension array with file lengths
+         */
+        int firstFileLength = prog1.length();
+        int secondFileLength = prog2.length();
+        int[][] twoFileDimArray = new int[firstFileLength + 1][secondFileLength + 1];
+
+        /*
+        for loop
+        goes through the 2 dimension array
+        finds characters that are equal to each other
+        stores the char if equal else it ignores it
+         */
+        for (int j = 0; j < firstFileLength; j++)
+            for (int k = 0; k < secondFileLength; k++)
+                // align this character match
+                if (prog1.charAt(j) == prog2.charAt(k)) {
+                    twoFileDimArray[j + 1][k + 1] = twoFileDimArray[j][k] + 1;
+                }
+                // choose to ignore one character
+        else {
+                    twoFileDimArray[j + 1][k + 1] = Math.max(twoFileDimArray[j][k + 1], twoFileDimArray[j + 1][k]);
+                }
+
+        // array that comes from recondtructLCS Method
+        char[] reconstructedArray = recondtructLCS(prog1, prog2, twoFileDimArray);
+        //return the reconstructed array's length
+        return reconstructedArray.length;
+    }
+
+    /**
+     * recondtructLCS Method
+     * finds common characters in a two dimension array
+     *
+     * @param prog1 string file one
+     * @param prog2 string file two
+     * @param twoDimLeng length of the two files
+     * @return a character array
+     */
+    private char[] recondtructLCS(String prog1, String prog2, int[][] twoDimLeng) {
+        /*
+        Method Variables
+        string builder called solution
+        first file's length
+        second file's length
+         */
+        StringBuilder solution = new StringBuilder();
+        int firstFileLength  = prog1.length();
+        int secondFileLength = prog2.length();
+
+        /*
+        while loop
+        goes through file lengths greater than 0
+         */
+        while (twoDimLeng[firstFileLength ][secondFileLength] > 0)
+            // if char are equal to each other they are kept
+            if (prog1.charAt(firstFileLength  - 1) == prog2.charAt(secondFileLength - 1)) {
+            solution.append(prog1.charAt(firstFileLength -1));
+            firstFileLength --;
+            secondFileLength--;
+        }
+        //else if one is equal to the past second
+        else if (twoDimLeng[firstFileLength  - 1][secondFileLength] >=
+                    twoDimLeng[firstFileLength ][secondFileLength - 1])
+            firstFileLength --;
+
+        else {
+            // common characters remain
+            secondFileLength--;
+        }
+        //returns the reversed string builder with matching characters
+        return solution.reverse().toString().toCharArray();
+    }
+
+    /**
+     * plagiarismScore
+     * calculated the plagiarism score
+     * @param filename1 string file one
+     * @param filename2 string file two
+     * @return
+     */
+    private double plagiarismScore(String filename1, String filename2) {
+        int che = lcsLength(filename1, filename2);
+        double score = 200 * (double)che / (double) (filename1.length() + filename2.length());
+        return score;
+    }
+
+    /**
+     * plagiarismChecker Method
+     * compares each file in a array to each other
+     * sending them to plagiarismScore which sends
+     * them to lcsLength method
+     * Prints the results of it's findings
+     * @param filenames string array
+     * @param threshold the min threshold
+     */
+    private void plagiarismChecker(String[] filenames, double threshold) {
+        //printing headers
+        System.out.println("Sudoku Assignment with threshold set at 55.0");
+        System.out.println("File1         "+
+                "File2          "+ "Score       ");
+        /*
+        for loop
+        goes though each file
+        compared each file with each file except itself
+         */
+        for(int i = 0; i < filenames.length;i++){
+            for(int j = i; j < filenames.length;j++) {
+
+                // call method to read each file storing in a string
+                String file1 = readFile(filenames[i]);
+                String file2 = readFile(filenames[j]);
+
+                // threshold is updated from score
+                threshold = plagiarismScore(file1, file2);
+
+                /*
+                if score of two files is within the threshold
+                i goes ahead and prints a formatted file numbers and score
+                 */
+                if (threshold >= 55.0 && threshold < 100.0) {
+                    //remove .txt from the string answers
+                    String fil1 = filenames[i].replace(".txt","");
+                    String fil2 = filenames[j].replace(".txt","");
+                    System.out.printf("%3s %12s %12s %3.2f %n",fil1,
+                            fil2,"", threshold);
+                }
+            }
+        }
+    }
+}
