@@ -1,8 +1,4 @@
 /**
- * @author MingFang Li (lim)
- * Course: CSCI 340 - DATA STRUCTURES/ALGORITHM DSGN
- * Date: 02/21/2019
- * Assignment: 2
  * Project/Class Description:
  *
  *              This program takes in integers and put them seperately
