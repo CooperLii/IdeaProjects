@@ -1,9 +1,6 @@
 package com.company;
 
 /**
- * Name: MingFang Li (lim)
- * Course: CSCI 242 - Computer Science II
- * Assignment: 1
  *
  * Project/Class Description:
  *  This program asks the user for a file name in order to read in the equations
