@@ -1,8 +1,4 @@
 /**
- * @author MingFang Li
- * Course: CSCI 340 - DATA STRUCTURES/ALGORITHM DSGN
- * Date: 04/25/2019
- * Assignment: 5
  * Project/Class Description:
  *
  * This program asks the user to input the name of the file that
