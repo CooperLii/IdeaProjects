@@ -1,8 +1,4 @@
 /**
- * @author MingFang Li (lim)
- * Course: CSCI 242 - Computer Science II
- * Date: 11/10/2018
- * Assignment: 4
  * Project/Class Description:
  * This program let users see Wisconsin election results in the map.
  * Known bugs: none
