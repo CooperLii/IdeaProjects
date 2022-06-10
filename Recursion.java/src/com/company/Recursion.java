@@ -1,9 +1,5 @@
 
 /**
- * @author MingFang Li (lim)
- * Course: CSCI 242 - Computer Science II
- * Date: 10/25/2018
- * Assignment: 3
  *
  * Project/Class Description: This project has several methods that use recurtion to solve
  *                              problems that are given.
