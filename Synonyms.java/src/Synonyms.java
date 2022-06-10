@@ -1,8 +1,4 @@
 /**
- * @author MingFang Li (lim)
- * Course: CSCI 242 - Computer Science II
- * Date: 11/28/2018
- * Assignment: 5
  * Project/Class Description:
  * This program asks the user to input a keyword and 4 different choices,
  * and use cosine similarity to calculate and then show the user which
