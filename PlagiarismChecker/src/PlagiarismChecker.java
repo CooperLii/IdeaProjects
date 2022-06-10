@@ -1,8 +1,4 @@
 /**
- * @author MingFang Li
- * Course: CSCI 340 - DATA STRUCTURES/ALGORITHM DSGN
- * Date: 04/30/2019
- * Assignment: 6
  * Project/Class Description:
  * <p>
  * This program takes an array of files which
