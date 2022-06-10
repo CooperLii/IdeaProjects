@@ -1,8 +1,4 @@
 /**
- * @author MingFang Li (lim)
- * Course: CSCI 340 - DATA STRUCTURES/ALGORITHM DSGN
- * Date: 02/12/2019
- * Assignment: 1
  * Project/Class Description:
  *
  *          This program reads in a file, calculates the page rank of
