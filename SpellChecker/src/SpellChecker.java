@@ -1,8 +1,4 @@
 /**
- * @author MingFang Li (lim)
- * Course: CSCI 340 - DATA STRUCTURES/ALGORITHM DSGN
- * Date: 03/12/2019
- * Assignment: 3
  * Project/Class Description:
  *
  * This program builds a data structure called Trie with the Lexicon
