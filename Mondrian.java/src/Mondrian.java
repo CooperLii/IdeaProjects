@@ -5,10 +5,6 @@ import java.util.Random;
 import javax.swing.*;
 
 /**
- * @author MingFang Li (lim)
- * Course: CSCI 242 - Computer Science II
- * Date: 11/05/2018
- * Assignment: Mondrian Art
  *
  * Project/Class Description: This project randomly split regions and randomly color them
  *
