@@ -1,8 +1,4 @@
 /**
- * @author MingFang Li (lim)
- * Course: CSCI 242 - Computer Science II
- * Date: 12/06/2018
- * Assignment: 6
  * Project/Class Description:
  * This project takes the input file and translate it into the Morse Code version,
  * if the file has all the letters.(ENCODE)
